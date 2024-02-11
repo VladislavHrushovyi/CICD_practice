@@ -1,33 +1,24 @@
-﻿using CICD.Application.Models;
-using CICD.Application.Repository;
+﻿using CICD.Application.Repository;
+using Microsoft.Azure.Cosmos;
+using User = CICD.Domain.Models.User;
 
 namespace CICD.Infrastructure.CosmosDb.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository(CosmosClient client, string databaseName, string containerName)
+    : IUserRepository
 {
-    public async Task<User> GetUserByProperties(User user)
+    private readonly Container _container = client.GetContainer(databaseName, containerName);
+
+    public Task<User> GetUserByProperties(User user)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Car> GetCarByUser(User user, Car car)
+    public async Task<User> AddNewUser(User user)
     {
-        throw new NotImplementedException();
-    }
+        var result = await _container.CreateItemAsync(user);
 
-    public Task<User> AddNewUser(User user)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User> AddCarToUser(Car car)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User> DeleteUser(User user)
-    {
-        throw new NotImplementedException();
+        return result.Resource;
     }
 
     public Task<User> UpdateUser(User user)
@@ -35,12 +26,7 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public Task<User> UpdateCarUser(User user, Car car)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User> DeleteCarUser(User user, Car car)
+    public Task<User> DeleteUser(User user)
     {
         throw new NotImplementedException();
     }

@@ -1,16 +1,16 @@
-﻿using System.Text.Json.Serialization;
-using CICD.Application.Common;
+﻿using CICD.Domain.Common;
+using Newtonsoft.Json;
 
-namespace CICD.Application.Models;
+namespace CICD.Domain.Models;
 
 public class User : BaseModel
 {
-    [JsonPropertyName("name")]
+    [JsonProperty(PropertyName = "name")]
     public string Name { get; set; }
     
-    [JsonPropertyName("surname")]
+    [JsonProperty(PropertyName = "surname")]
     public string Surname { get; set; }
     
-    [JsonIgnore]
+    [JsonProperty(PropertyName = "cars")]
     public ICollection<Car> Cars { get; set; }
 }

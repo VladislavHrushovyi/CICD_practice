@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CICD.Application\CICD.Application.csproj" />
+      <ProjectReference Include="..\CICD.Infrastructure.CosmosDb\CICD.Infrastructure.CosmosDb.csproj" />
     </ItemGroup>
 
 </Project>

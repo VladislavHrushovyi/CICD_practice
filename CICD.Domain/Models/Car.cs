@@ -1,12 +1,13 @@
 ﻿using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace CICD.Application.Models;
+namespace CICD.Domain.Models;
 
 public class Car
 {
-    [JsonPropertyName("brand")]
+    [JsonProperty(PropertyName = "brand")]
     public string Brand { get; set; }
     
-    [JsonPropertyName("model")]
+    [JsonProperty(PropertyName = "model")]
     public string Model { get; set; }    
 }

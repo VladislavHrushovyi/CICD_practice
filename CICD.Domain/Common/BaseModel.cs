@@ -1,12 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
-namespace CICD.Application.Common;
+namespace CICD.Domain.Common;
 
 public class BaseModel
 {
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
+    [JsonProperty(PropertyName = "id")]
+    public string Id { get; set; }
     
-    [JsonPropertyName("createdAt")]
+    [JsonProperty(PropertyName = "createdAt")]
     public string CreatedAt { get; set; }
 }
