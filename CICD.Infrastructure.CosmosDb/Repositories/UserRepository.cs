@@ -9,14 +9,21 @@ public class UserRepository(CosmosClient client, string databaseName, string con
 {
     private readonly Container _container = client.GetContainer(databaseName, containerName);
 
-    public Task<User> GetUserByProperties(User user)
+    public async Task<User> Get(string id)
+    {
+        var result = await _container.ReadItemAsync<User>(id, new PartitionKey(id));
+
+        return result.Resource;
+    }
+
+    public Task<IEnumerable<User>> GetMultiple(string queryString)
     {
         throw new NotImplementedException();
     }
 
     public async Task<User> AddNewUser(User user)
     {
-        var result = await _container.CreateItemAsync(user);
+        var result = await _container.CreateItemAsync(user, new PartitionKey(user.Id));
 
         return result.Resource;
     }

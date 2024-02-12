@@ -1,5 +1,6 @@
 using CICD.Application.Extension;
 using CICD.Application.Features.AddNewUser;
+using CICD.Application.Features.GetUserById;
 using CICD.Infrastructure.CosmosDb.Extension;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +21,12 @@ app.UseHttpsRedirection();
 
 app.MapPost("/add-user", 
     async ([FromBody] AddNewUserRequest req, [FromServices]AddNewUserHandler handler) => await handler.Handle(req));
+
+app.MapGet("/search/{id}", async (
+    [FromQuery]string id, 
+    [FromServices]GetUserByIdHandler handler) 
+    => await handler.Handle(id));
+
+
 
 app.Run();

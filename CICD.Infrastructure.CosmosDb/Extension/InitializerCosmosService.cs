@@ -23,7 +23,7 @@ public static class InitializerCosmosService
 
         var client = new CosmosClient(account, key);
         var database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
-        await database.Database.CreateContainerIfNotExistsAsync(containerName, "/users");
+        await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
 
         var cosmosDbService = new UserRepository(client, databaseName, containerName);
 
