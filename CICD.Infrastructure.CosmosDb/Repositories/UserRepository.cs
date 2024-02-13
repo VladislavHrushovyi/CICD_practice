@@ -2,7 +2,6 @@
 using CICD.Infrastructure.CosmosDb.Common;
 using Microsoft.Azure.Cosmos;
 using User = CICD.Domain.Models.User;
-
 namespace CICD.Infrastructure.CosmosDb.Repositories;
 
 public class UserRepository(CosmosClient client, string databaseName, string containerName)
@@ -41,9 +40,11 @@ public class UserRepository(CosmosClient client, string databaseName, string con
         return result.Resource;
     }
 
-    public Task<User> UpdateUser(User user)
+    public async Task<User> UpdateUser(User user)
     {
-        throw new NotImplementedException();
+        var result = await _container.UpsertItemAsync(user, new PartitionKey(user.Id));
+
+        return result.Resource;
     }
 
     public Task<User> DeleteUser(User user)
