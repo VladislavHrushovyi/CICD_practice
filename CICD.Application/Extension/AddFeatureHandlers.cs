@@ -1,5 +1,6 @@
 ﻿using CICD.Application.Features.AddNewUser;
 using CICD.Application.Features.GetUserById;
+using CICD.Application.Features.SearchUsers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CICD.Application.Extension;
@@ -10,5 +11,6 @@ public static class AddFeatureHandlers
     {
         services.AddScoped<AddNewUserHandler>();
         services.AddScoped<GetUserByIdHandler>();
+        services.AddScoped<SearchUserHandler>();
     }
 }

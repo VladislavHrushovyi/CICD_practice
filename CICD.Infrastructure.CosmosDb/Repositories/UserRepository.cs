@@ -1,4 +1,5 @@
 ﻿using CICD.Application.Repository;
+using CICD.Infrastructure.CosmosDb.Common;
 using Microsoft.Azure.Cosmos;
 using User = CICD.Domain.Models.User;
 
@@ -16,9 +17,21 @@ public class UserRepository(CosmosClient client, string databaseName, string con
         return result.Resource;
     }
 
-    public Task<IEnumerable<User>> GetMultiple(string queryString)
+    public async Task<List<User>> GetMultiple(User user)
     {
-        throw new NotImplementedException();
+        var sqlQuery = "SELECT * FROM c WHERE ";
+        var conditionalPart = QueryHelper.ObjectPropertiesToSqlConditional(user, "c");
+        sqlQuery += conditionalPart;
+
+        var queryResult = _container.GetItemQueryIterator<User>(sqlQuery);
+        var results = new List<User>();
+        while (queryResult.HasMoreResults)
+        {
+            var response = await queryResult.ReadNextAsync();
+            results.AddRange(response.ToList());
+        }
+
+        return results;
     }
 
     public async Task<User> AddNewUser(User user)

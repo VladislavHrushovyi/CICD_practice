@@ -1,6 +1,7 @@
 using CICD.Application.Extension;
 using CICD.Application.Features.AddNewUser;
 using CICD.Application.Features.GetUserById;
+using CICD.Application.Features.SearchUsers;
 using CICD.Infrastructure.CosmosDb.Extension;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,14 +20,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/add-user", 
-    async ([FromBody] AddNewUserRequest req, [FromServices]AddNewUserHandler handler) => await handler.Handle(req));
+app.MapPost("/add-user",
+    async ([FromBody] AddNewUserRequest req, [FromServices] AddNewUserHandler handler) => await handler.Handle(req));
 
 app.MapGet("/search/{id}", async (
-    [FromQuery]string id, 
-    [FromServices]GetUserByIdHandler handler) 
+        [FromQuery] string id,
+        [FromServices] GetUserByIdHandler handler)
     => await handler.Handle(id));
 
+app.MapGet("/search", async (
+    [FromQuery] string name,
+    [FromQuery] string surname,
+    [FromServices] SearchUserHandler handler
+) => await handler.Handle(new SearchUserRequest() { Name = name, Surname = surname }));
 
 
 app.Run();
