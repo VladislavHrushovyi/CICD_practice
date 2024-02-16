@@ -5,15 +5,22 @@ using CICD.Application.Features.SearchUsers;
 using CICD.Application.Features.UpdateUser;
 using CICD.Domain.Models;
 using CICD.Infrastructure.CosmosDb.Extension;
+using CIDI_practice.Extension;
 using Microsoft.AspNetCore.Mvc;
 
-var builder = WebApplication.CreateBuilder(args);
+foreach (var arg in args)
+{
+    Console.WriteLine(arg);
+}
 
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddEntryArguments(args);
 builder.Services.AddFeatureApplicationHandlers();
 builder.Services.AddRepositories();
 builder.Services.AddCors();
+
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -25,7 +32,6 @@ app.UseCors(x =>
     x.AllowAnyOrigin();
 });
 app.UseHttpsRedirection();
-
 app.MapPost("/add-user",
     async ([FromBody] AddNewUserRequest req, [FromServices] AddNewUserHandler handler) => await handler.Handle(req));
 
