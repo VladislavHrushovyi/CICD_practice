@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'for-my-first-cicda-pp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2C5B5EBE44A045DB8256EEF12270A750 }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: .
