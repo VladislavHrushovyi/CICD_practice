@@ -41,4 +41,6 @@ app.MapPatch("/{id}", async (
         [FromBody]User req, 
         [FromServices]UpdateUserHandler handler)
     => await handler.Handle(id, req));
+
+app.MapGet("/", () => "Hello from CICD");
 app.Run();
