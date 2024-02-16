@@ -55,5 +55,5 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: .
-      - name: run web api
-        run: dotnet CICD.WebApi.dll Account=${{secrets.ACCOUNT}} Key=${{secrets.KEY}} DatabaseName=${{secrets.DATABASE_NAME}} ContainerName=${{secrets.CONTAINER_NAME}}
+#      - name: run web api
+#        run: dotnet CICD.WebApi.dll Account=${{secrets.ACCOUNT}} Key=${{secrets.KEY}} DatabaseName=${{secrets.DATABASE_NAME}} ContainerName=${{secrets.CONTAINER_NAME}}
