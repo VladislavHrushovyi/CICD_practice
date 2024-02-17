@@ -51,11 +51,11 @@ jobs:
         run: echo "Account=${{secrets.ACCOUNT}}" >> .env |
               echo "Key=${{secrets.KEY}}" >> .env |
               echo "ContainerName=${{secrets.CONTAINER_NAME}}" >> .env |
-              echo "DatabaseName=${{secrets.DATABASE_NAME}}" .env 
+              echo "DatabaseName=${{secrets.DATABASE_NAME}}" >> .env 
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'my-webapi-for-cicd'
           slot-name: 'Production'

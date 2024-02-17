@@ -49,4 +49,15 @@ public class UserRepositoryTest
         
         Assert.Equal(id, result.Id);
     }
+
+    [Fact]
+    public void PrintCurrDirectory()
+    {
+        var dir = Environment.CurrentDirectory;
+        File.Create(Environment.CurrentDirectory + "/.env");
+        var isFileExist = File.Exists(Environment.CurrentDirectory + "/.env");
+        var filePath = Environment.CurrentDirectory + "/env";
+        Assert.NotNull(dir);
+        Assert.True(isFileExist);
+    }
 }

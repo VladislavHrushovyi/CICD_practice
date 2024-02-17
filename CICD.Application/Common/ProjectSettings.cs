@@ -5,9 +5,10 @@ public static class ProjectSettings
     public static readonly Dictionary<string, string> EnvVars = new();
     static ProjectSettings()
     {
-        if (File.Exists(Environment.CurrentDirectory + @"\.env"))
+        Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
+        if (File.Exists(Environment.CurrentDirectory + "/.env"))
         {
-            var fileValues = File.ReadAllLines(Environment.CurrentDirectory + @"\.env");
+            var fileValues = File.ReadAllLines(Environment.CurrentDirectory + "/.env");
             HandleSettingsLines(fileValues);   
         }
     }
