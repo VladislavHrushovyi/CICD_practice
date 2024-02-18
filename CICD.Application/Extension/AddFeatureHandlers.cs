@@ -1,4 +1,5 @@
 ﻿using CICD.Application.Features.AddNewUser;
+using CICD.Application.Features.DeleteUserHandler;
 using CICD.Application.Features.GetUserById;
 using CICD.Application.Features.SearchUsers;
 using CICD.Application.Features.UpdateUser;
@@ -14,5 +15,6 @@ public static class AddFeatureHandlers
         services.AddScoped<GetUserByIdHandler>();
         services.AddScoped<SearchUserHandler>();
         services.AddScoped<UpdateUserHandler>();
+        services.AddScoped<DeleteUserHandler>();
     }
 }

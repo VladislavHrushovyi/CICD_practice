@@ -47,8 +47,10 @@ public class UserRepository(CosmosClient client, string databaseName, string con
         return result.Resource;
     }
 
-    public Task<User> DeleteUser(User user)
+    public async Task<User> DeleteUser(User user)
     {
-        throw new NotImplementedException();
+        var result  = await _container.DeleteItemAsync<User>(user.Id, new PartitionKey(user.Id));
+
+        return user;
     }
 }

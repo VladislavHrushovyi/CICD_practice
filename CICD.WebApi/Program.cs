@@ -1,5 +1,6 @@
 using CICD.Application.Extension;
 using CICD.Application.Features.AddNewUser;
+using CICD.Application.Features.DeleteUserHandler;
 using CICD.Application.Features.GetUserById;
 using CICD.Application.Features.SearchUsers;
 using CICD.Application.Features.UpdateUser;
@@ -36,7 +37,7 @@ app.MapPost("/add-user",
     async ([FromBody] AddNewUserRequest req, [FromServices] AddNewUserHandler handler) => await handler.Handle(req));
 
 app.MapGet("/search/{id}", async (
-        [FromQuery] string id,
+        string id,
         [FromServices] GetUserByIdHandler handler)
     => await handler.Handle(id));
 
@@ -51,6 +52,6 @@ app.MapPatch("/{id}", async (
         [FromBody]User req, 
         [FromServices]UpdateUserHandler handler)
     => await handler.Handle(id, req));
-
-app.MapGet("/", () => "Hello from CICD");
+app.MapDelete("/user/{id}", async (string id, DeleteUserHandler handler) => await handler.Handle(id));
+app.MapGet("/", () => @"<h1>HELLO FROM WEB API<\h1>");
 app.Run();
